@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">Cadastro de Estado</mat-toolbar>
+<mat-toolbar color="primary" class="centered-toolbar">Cadastro de Estado</mat-toolbar>
 <div class="form-container">
     <mat-card>
         <mat-card-content>
@@ -26,13 +26,14 @@
         <mat-card-actions>
             <button mat-raised-button 
                 color="primary" 
-                (click)="onSubmit()"
+                (click)="salvar()"
                 [disabled]="formGroup.invalid">
                 Salvar
             </button>
             <button mat-raised-button 
+                *ngIf="formGroup?.get('id')?.value"
                 color="warn" 
-                (click)="onSubmit()"
+                (click)="excluir()"
                 [disabled]="formGroup.invalid">
                 Excluir
             </button>
