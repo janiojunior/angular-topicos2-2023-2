@@ -14,7 +14,7 @@ export class EstadosComponent implements OnInit {
   constructor(private estadoService: EstadoService) {}
 
   ngOnInit(): void {
-    this.estadoService.getEstados().subscribe(data => {
+    this.estadoService.findAll().subscribe(data => {
       this.estados = data;
     });
   }
