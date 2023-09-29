@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Estado } from 'src/app/models/estado.model';
 import { EstadoService } from 'src/app/services/estado.service';
 
@@ -9,8 +10,12 @@ import { EstadoService } from 'src/app/services/estado.service';
 })
 export class EstadoListComponent implements OnInit {
 
-  tableColumns: string[] = ['id-column', 'nome-column', 'sigla-column'];
+  tableColumns: string[] = ['id-column', 'nome-column', 'sigla-column', 'acao-column'];
   estados: Estado[] = [];
+  totalRegistros = 0;
+  pageSize = 2;
+  pagina = 0;
+  filtro: string = "";
 
   constructor(private estadoService: EstadoService) {}
 
@@ -18,6 +23,20 @@ export class EstadoListComponent implements OnInit {
     this.estadoService.findAll().subscribe(data => {
       this.estados = data;
     });
+  }
+
+  carregarEstados() {
+
+  }
+
+  carregarTotalRegistros() {
+  }
+
+  // Método para paginar os resultados
+  paginar(event: PageEvent): void {
+  }
+
+  aplicarFiltro() {
   }
 
 }

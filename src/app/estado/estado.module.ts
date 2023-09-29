@@ -14,6 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
+import { MatPaginatorModule } from '@angular/material/paginator';
+
+import { FormsModule } from '@angular/forms'; 
+
 @NgModule({
   declarations: [
     EstadoListComponent,
@@ -29,7 +33,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule,
+    FormsModule
   ]
 })
 export class EstadoModule { }
