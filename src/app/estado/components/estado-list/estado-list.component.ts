@@ -20,23 +20,47 @@ export class EstadoListComponent implements OnInit {
   constructor(private estadoService: EstadoService) {}
 
   ngOnInit(): void {
-    this.estadoService.findAll().subscribe(data => {
-      this.estados = data;
-    });
+    this.carregarEstados();
+    this.carregarTotalRegistros();
   }
 
   carregarEstados() {
-
+    // se existe dados no filtro
+    if (this.filtro) {
+      this.estadoService.findByNome(this.filtro, this.pagina, this.pageSize).subscribe(data => {
+        this.estados = data;
+      });
+    } else {
+      // buscando todos os estados
+      this.estadoService.findAll(this.pagina, this.pageSize).subscribe(data => {
+        this.estados = data;
+      });
+    }
   }
 
   carregarTotalRegistros() {
+    // se existe dados no filtro
+    if (this.filtro) {
+      this.estadoService.countByNome(this.filtro).subscribe(data => {
+        this.totalRegistros = data;
+      });
+    } else {
+      this.estadoService.count().subscribe(data => {
+        this.totalRegistros = data;
+      });
+    }
   }
 
   // Método para paginar os resultados
   paginar(event: PageEvent): void {
+    this.pagina = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.carregarEstados();
   }
 
   aplicarFiltro() {
+    this.carregarEstados();
+    this.carregarTotalRegistros();
   }
 
 }
