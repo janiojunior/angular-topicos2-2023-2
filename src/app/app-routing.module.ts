@@ -12,6 +12,12 @@ const routes: Routes = [
     path: 'cidades', loadChildren:
       () => import('./cidade/cidade.module')
         .then(m => m.CidadeModule)
+  },
+
+  {
+    path: 'faixas', loadChildren:
+      () => import('./faixa/faixa.module')
+        .then(m => m.FaixaModule)
   }
 ];
 
