@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { AuthModule } from './auth/auth.module';
 
 registerLocaleData(localePt);
 
@@ -22,7 +23,8 @@ registerLocaleData(localePt);
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    AuthModule
   ],
   providers: [{provide: LOCALE_ID, useValue: 'pt'}],
   bootstrap: [AppComponent]

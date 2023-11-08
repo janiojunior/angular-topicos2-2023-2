@@ -32,7 +32,6 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     MatToolbarModule,
     MatTableModule
-
   ]
 })
 export class CidadeModule { }
