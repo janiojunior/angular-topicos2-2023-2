@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
         next: () => {
           //this.showSnackbarTopPosition(this.authService.getToken(), 'Fechar', 2000);
           // redirecionar para a página principal
-          this.router.navigateByUrl('/cidades/list');
+          this.router.navigateByUrl('/faixas/card-list');
         },
         error: (err) => {
           this.showSnackbarTopPosition("Usuário ou senha Inválidos", 'Fechar', 2000);

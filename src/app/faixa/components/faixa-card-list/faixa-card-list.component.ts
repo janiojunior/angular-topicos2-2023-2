@@ -54,6 +54,12 @@ export class FaixaCardListComponent implements OnInit {
 
   adicionarAoCarrinho(card: Card) {
     this.showSnackbarTopPosition('Produto adicionado ao carrinho!', 'Fechar');
+    this.carrinhoService.adicionar({
+      id: card.idFaixa,
+      nome: card.titulo,
+      preco: card.preco,
+      quantidade: 1
+    })
 
   }
 
