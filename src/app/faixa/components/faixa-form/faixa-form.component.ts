@@ -11,10 +11,10 @@ import { FaixaService } from 'src/app/services/faixa.service';
   styleUrls: ['./faixa-form.component.css']
 })
 export class FaixaFormComponent {
-  modalidades: Modalidade[] = [];
   formGroup: FormGroup;
   apiResponse: any = null;
-
+  
+  modalidades: Modalidade[] = [];
   fileName: string = '';
   selectedFile: File | null = null; 
   imagePreview: string | ArrayBuffer | null = null;
@@ -33,6 +33,11 @@ export class FaixaFormComponent {
       modalidade:[null]
     });
 
+    faixaService.findModalidades().subscribe(data => {
+      this.modalidades = data;
+      this.initializeForm();
+    });
+
   }
 
   initializeForm() {
@@ -41,6 +46,12 @@ export class FaixaFormComponent {
     const modalidade = this.modalidades.find(m => m.id === (faixa?.modalidade?.id || null));
 
     console.log(modalidade);
+
+    // carregando a imagem do preview
+    if (faixa && faixa.nomeImagem) {
+      this.imagePreview = this.faixaService.getUrlImagem(faixa.nomeImagem);
+      this.fileName = faixa.nomeImagem;
+    }
 
     this.formGroup = this.formBuilder.group({
       id:[(faixa && faixa.id) ? faixa.id : null],
@@ -60,7 +71,7 @@ export class FaixaFormComponent {
       if (faixa.id == null) {
         this.faixaService.save(faixa).subscribe({
           next: (faixaCadastrada) => {
-            this.router.navigateByUrl('/faixas/list');
+            this.uploadImage(faixaCadastrada.id);
           },
           error: (errorResponse) => {
              // Processar erros da API
@@ -78,7 +89,7 @@ export class FaixaFormComponent {
       } else {
         this.faixaService.update(faixa).subscribe({
           next: (faixaAtualizada) => {
-            this.router.navigateByUrl('/faixas/list');
+            this.uploadImage(faixaAtualizada.id);
           },
           error: (err) => {
             console.log('Erro ao alterar' + JSON.stringify(err));
@@ -108,12 +119,33 @@ export class FaixaFormComponent {
   }
 
   carregarImagemSelecionada(event: any) {
+    this.selectedFile = event.target.files[0];
 
+    if (this.selectedFile) {
+      this.fileName = this.selectedFile.name;
+      // carregando image preview
+      const reader = new FileReader();
+      reader.onload = e => this.imagePreview = reader.result;
+      reader.readAsDataURL(this.selectedFile);
+    }
 
   }
 
   private uploadImage(faixaId: number) {
-
+    if (this.selectedFile) {
+      this.faixaService.uploadImagem(faixaId, this.selectedFile.name, this.selectedFile)
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('/faixas/list');
+        },
+        error: err => {
+          console.log('Erro ao fazer o upload da imagem');
+          // tratar o erro
+        }
+      })
+    } else {
+      this.router.navigateByUrl('/faixas/list');
+    }
   }
 
 }

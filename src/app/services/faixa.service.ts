@@ -70,4 +70,17 @@ export class FaixaService {
     return `${this.baseURL}/image/download/${nomeImagem}`;
   }
 
+  uploadImagem(id: number, nomeImagem: string, imagem: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('id', id.toString());
+    formData.append('nomeImagem', imagem.name);
+    formData.append('imagem', imagem, imagem.name);
+    
+    return this.http.patch<Faixa>(`${this.baseURL}/image/upload`, formData);
+  }
+
+  findModalidades(): Observable<Modalidade[]> {
+    return this.http.get<Modalidade[]>(`${this.baseURL}/modalidades`);
+  }
+
 }

@@ -5,7 +5,7 @@
             <form [formGroup]="formGroup" >
                 <mat-form-field appearance="outline" class="full-width-input">
                     <mat-label>Nome</mat-label>
-                    <input matInput type="text" formControlName="nome" />
+                    <input matInput type="text" formControlName="nome" #inputNome />
                     <mat-error *ngIf="formGroup.get('nome')?.hasError('apiError')">
                         {{ formGroup.get('nome')?.getError('apiError') }}
                     </mat-error>
@@ -20,7 +20,7 @@
                 
                 <mat-form-field appearance="outline" class="full-width-input">
                     <mat-label>Modalidade</mat-label>
-                    <mat-select formControlName="modalidade" >
+                    <mat-select formControlName="modalidade" #selectModalidade >
                         <mat-option *ngFor="let modalidade of modalidades" [value]="modalidade">
                             {{ modalidade.label }}
                         </mat-option>
@@ -32,7 +32,7 @@
                 </mat-form-field>
                 <mat-form-field appearance="outline" class="full-width-input">
                     <mat-label>Preço</mat-label>
-                    <input matInput type="text" formControlName="preco" />
+                    <input matInput type="text" formControlName="preco" #inputPreco />
                     <mat-error *ngIf="formGroup.get('preco')?.hasError('apiError')">
                         {{ formGroup.get('preco')?.getError('apiError') }}
                     </mat-error>
@@ -53,8 +53,27 @@
                         <mat-icon>folder_open</mat-icon>
                     </button>   
                 </mat-form-field>
-                <div *ngIf="imagePreview">
-                    <img mat-card-image [src]="imagePreview" >
+
+                <div *ngIf="imagePreview" class="container responsive-grid">
+                    <mat-card>
+                
+                        <img mat-card-image [src]="imagePreview" >
+                       
+                        <mat-card-title class="centered-text"> {{inputNome.value}} </mat-card-title>
+                        
+                        <mat-card-content class="centered-text"> {{selectModalidade.value}} </mat-card-content>
+                        <br/>
+                        <mat-card-content class="centered-text"> {{inputPreco.value | currency:'BRL'}} </mat-card-content>
+                
+                        <mat-card-actions class="centered-text">
+                            <button mat-button color="primary">Ver mais ...</button>
+                        </mat-card-actions>
+                
+                        <mat-card-footer>
+                            <button mat-flat-button color="accent"
+                                style="width: 100%; padding: 16px;">Adicionar ao carrinho</button>
+                        </mat-card-footer>
+                    </mat-card>
                 </div>
                 
             </form>
