@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Faixa } from '../models/faixa.model';
+import { Modalidade } from '../models/modalidade.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,11 +33,25 @@ export class FaixaService {
   }
 
   save(faixa: Faixa): Observable<Faixa> {
-    return this.http.post<Faixa>(`${this.baseURL}`, faixa);
+    const obj = {
+      nome: faixa.nome,
+      descricao: faixa.descricao,
+      preco: faixa.preco,
+      estoque: faixa.estoque,
+      idModalidade: faixa.modalidade.id
+    }
+    return this.http.post<Faixa>(`${this.baseURL}`, obj);
   }
 
   update(faixa: Faixa): Observable<Faixa> {
-    return this.http.put<Faixa>(`${this.baseURL}/${faixa.id}`, faixa );
+    const obj = {
+      nome: faixa.nome,
+      descricao: faixa.descricao,
+      preco: faixa.preco,
+      estoque: faixa.estoque,
+      idModalidade: faixa.modalidade.id
+    }
+    return this.http.put<Faixa>(`${this.baseURL}/${faixa.id}`, obj);
   }
 
   delete(faixa: Faixa): Observable<any> {
