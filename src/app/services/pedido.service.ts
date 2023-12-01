@@ -4,13 +4,6 @@ import { Observable } from 'rxjs';
 import { Estado } from '../models/estado.model';
 import { ItemCarrinho } from '../models/item-carrinho.interface';
 
-
-// export interface ItemPedido {
-//   quantidade: number;
-//   preco: number;
-//   idFaixa: number;
-// }
-
 @Injectable({
   providedIn: 'root'
 })

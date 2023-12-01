@@ -17,7 +17,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   qtdItensCarrinho:number = 0;
-  usuarioSignal = signal(new Usuario());
 
   constructor(private sidebarService: SidebarService,
               private carrinhoService: CarrinhoService,
@@ -28,9 +27,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
       this.obterQtdItensCarrinho();
-      this.obterUsuarioLogado();
-     
-      
+      this.obterUsuarioLogado();   
   }
 
   ngOnDestroy() {
@@ -41,9 +38,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.sidebarService.toggle();
   }
 
-
   obterQtdItensCarrinho() {
-    this.carrinhoService.carrinho$.subscribe(itens => {this.qtdItensCarrinho = itens.length});
+    this.carrinhoService.carrinho$.subscribe(itens => {
+      this.qtdItensCarrinho = itens.length
+    });
   }
 
   obterUsuarioLogado() {

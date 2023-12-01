@@ -4,13 +4,6 @@ import { BehaviorSubject } from 'rxjs';
 import { LocalStorageService } from './local-storage-service';
 import { ItemCarrinho } from '../models/item-carrinho.interface';
 
-// export interface ItemCarrinho {
-//   id: number;
-//   nome: string;
-//   quantidade: number;
-//   preco: number;
-// }
-
 @Injectable({
   providedIn: 'root',
 })
