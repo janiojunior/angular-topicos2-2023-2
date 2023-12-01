@@ -4,10 +4,13 @@
     </button>
     <span>Artes Marciais - Faixas</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-        <mat-icon>favorite</mat-icon>
+    <button routerLink="/user/compras/carrinho" mat-icon-button class="demo-section example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+        <mat-icon [matBadge]="qtdItensCarrinho"  matBadgeColor="warn" matBadgePosition="after" matBadgeOverlap="false">shopping_cart</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-        <mat-icon>share</mat-icon>
+
+
+    <button value="blah" mat-icon-button (click)="deslogar()">
+      <mat-icon>exit_to_app</mat-icon>
     </button>
+    <span>{{usuarioLogado?.nome}}</span>
 </mat-toolbar>

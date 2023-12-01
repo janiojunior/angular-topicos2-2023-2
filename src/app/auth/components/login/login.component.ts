@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { ConnectableObservable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage-service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private authService: AuthService,
               private router: Router,
+              private localStorageService: LocalStorageService,
               private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
@@ -29,12 +32,13 @@ export class LoginComponent implements OnInit {
       const email = this.loginForm.get('email')!.value;
       const password = this.loginForm.get('password')!.value;
       this.authService.login(email, password).subscribe( {
-        next: () => {
+        next: (resp) => {
           //this.showSnackbarTopPosition(this.authService.getToken(), 'Fechar', 2000);
           // redirecionar para a página principal
-          this.router.navigateByUrl('/faixas/card-list');
+          this.router.navigateByUrl('/user/compras/produtos');
         },
         error: (err) => {
+          console.log(err);
           this.showSnackbarTopPosition("Usuário ou senha Inválidos", 'Fechar', 2000);
         }
       });   

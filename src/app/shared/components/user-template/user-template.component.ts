@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CarrinhoService } from 'src/app/services/carrinho.service';
 
 @Component({
   selector: 'app-user-template',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-template.component.css']
 })
 export class UserTemplateComponent {
+
 
 }

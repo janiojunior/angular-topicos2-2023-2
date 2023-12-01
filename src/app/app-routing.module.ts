@@ -6,63 +6,79 @@ import { EstadoFormComponent } from './estado/components/estado-form/estado-form
 import { UserTemplateComponent } from './shared/components/user-template/user-template.component';
 import { CarrinhoComponent } from './compra/components/carrinho/carrinho.component';
 
-// const routes: Routes = [
-//   {
-//     path: 'admin',
-//     component: AdminTemplateComponent,
-//     children: [
-//       { path: 'estados', loadChildren:
-//       () => import('./estado/estado.module')
-//         .then(m => m.EstadoModule)},
-//       { path: 'cidades', loadChildren:
-//       () => import('./cidade/cidade.module')
-//         .then(m => m.CidadeModule)},
-//       { path: 'faixas', loadChildren:
-//       () => import('./faixa/faixa.module')
-//         .then(m => m.FaixaModule)},
-//     ],
-//   },
-//   {
-//     path: 'user',
-//     component: UserTemplateComponent,
-//     children: [
-//       { path: 'login', component: LoginComponent },
-//       // { path: 'register', component: RegisterComponent },
-//     ],
-//   },
-//   { path: '', redirectTo: '/user', pathMatch: 'full' }, // Rota padrão
-//   { path: '**', redirectTo: '/user' }, // Rota para tratamento de erro
-// ];
-
-
 const routes: Routes = [
   {
-    path: 'estados', loadChildren:
-      () => import('./estado/estado.module')
-        .then(m => m.EstadoModule)
+    path: 'admin',
+    component: AdminTemplateComponent,
+    children: [
+      {
+        path: 'estados', loadChildren:
+          () => import('./estado/estado.module')
+            .then(m => m.EstadoModule)
+      },
+      {
+        path: 'cidades', loadChildren:
+          () => import('./cidade/cidade.module')
+            .then(m => m.CidadeModule)
+      },
+      {
+        path: 'faixas', loadChildren:
+          () => import('./faixa/faixa.module')
+            .then(m => m.FaixaModule)
+      },
+    ],
   },
-
   {
-    path: 'cidades', loadChildren:
-      () => import('./cidade/cidade.module')
-        .then(m => m.CidadeModule)
+    path: 'user',
+    component: UserTemplateComponent,
+    children: [
+      // { path: 'login', component: LoginComponent },
+      {
+        path: 'auth', loadChildren:
+          () => import('./auth/auth.module')
+            .then(m => m.AuthModule)
+      },
+      {
+        path: 'compras', loadChildren:
+          () => import('./compra/compra.module')
+            .then(m => m.CompraModule)
+      },
+      // { path: 'register', component: RegisterComponent },
+    ],
   },
-
-  {
-    path: 'faixas', loadChildren:
-      () => import('./faixa/faixa.module')
-        .then(m => m.FaixaModule)
-  },
-
-  {
-    path: 'login', 
-    component: LoginComponent, 
-  },
-  {
-    path: 'carrinho', 
-    component: CarrinhoComponent, 
-  }
+  { path: '', redirectTo: '/user', pathMatch: 'full' }, // Rota padrão
+  { path: '**', redirectTo: '/user' }, // Rota para tratamento de erro
 ];
+
+
+// const routes: Routes = [
+//   {
+//     path: 'estados', loadChildren:
+//       () => import('./estado/estado.module')
+//         .then(m => m.EstadoModule)
+//   },
+
+//   {
+//     path: 'cidades', loadChildren:
+//       () => import('./cidade/cidade.module')
+//         .then(m => m.CidadeModule)
+//   },
+
+//   {
+//     path: 'faixas', loadChildren:
+//       () => import('./faixa/faixa.module')
+//         .then(m => m.FaixaModule)
+//   },
+
+//   {
+//     path: 'login', 
+//     component: LoginComponent, 
+//   },
+//   {
+//     path: 'carrinho', 
+//     component: CarrinhoComponent, 
+//   }
+// ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

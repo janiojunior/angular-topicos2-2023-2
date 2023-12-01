@@ -5,9 +5,15 @@ import { AuthService } from 'src/app/services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Ignora o interceptor para o endpoint do relatório
+    if (request.url.endsWith('/faixas/relatorio')) {
+      return next.handle(request);
+    }
+
+
     // Obtém o token jwt
     const authToken = this.authService.getToken();
 

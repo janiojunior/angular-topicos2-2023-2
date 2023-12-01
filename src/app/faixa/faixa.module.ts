@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FaixaRoutingModule } from './faixa-routing.module';
-import { FaixaCardListComponent } from './components/faixa-card-list/faixa-card-list.component';
+import { FaixaCardListComponent } from '../compra/components/faixa-card-list/faixa-card-list.component';
 import { FaixaFormComponent } from './components/faixa-form/faixa-form.component';
 import { FaixaListComponent } from './components/faixa-list/faixa-list.component';
 

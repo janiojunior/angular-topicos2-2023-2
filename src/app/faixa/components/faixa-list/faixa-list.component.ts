@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { Faixa } from 'src/app/models/faixa.model';
 import { FaixaService } from 'src/app/services/faixa.service';
+import { RelatorioService } from 'src/app/services/relatorio.service';
 
 @Component({
   selector: 'app-faixa-list',
@@ -16,7 +17,8 @@ export class FaixaListComponent {
   pagina = 0;
   filtro: string = "";
 
-  constructor(private faixaService: FaixaService) {}
+  constructor(private faixaService: FaixaService, 
+             private relatorioService: RelatorioService) {}
 
   ngOnInit(): void {
     this.carregarFaixas();
@@ -61,4 +63,5 @@ export class FaixaListComponent {
     this.carregarFaixas();
     this.carregarTotalRegistros();
   }
+
 }

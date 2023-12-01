@@ -9,7 +9,7 @@
       <button mat-raised-button color="warn" (click)="removerItem(item)">Remover do Carrinho</button>
     </div>
     <p>Total do Carrinho: {{ calcularTotal() }}</p>
-    <button mat-raised-button color="primary">Finalizar Compra</button>
+    <button mat-raised-button color="primary" (click)="finalizarCompra()" >Finalizar Compra</button>
   </ng-container>
   <ng-template #carrinhoVazio>
     <p>O carrinho está vazio.</p>
